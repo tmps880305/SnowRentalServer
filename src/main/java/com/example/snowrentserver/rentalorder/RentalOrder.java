@@ -23,7 +23,7 @@ public class RentalOrder {
 
     private Long id;
     private String customerName;
-    private float height;
+    private int height;
     private String postal;
     private String city;
     @ManyToMany
@@ -34,7 +34,7 @@ public class RentalOrder {
     public RentalOrder() {
     }
 
-    public RentalOrder(Long id, String customerName, float height, String postal, String city, List<RentalOrderItem> items, float total) {
+    public RentalOrder(Long id, String customerName, int height, String postal, String city, List<RentalOrderItem> items, float total) {
         this.id = id;
         this.customerName = customerName;
         this.height = height;
@@ -64,7 +64,7 @@ public class RentalOrder {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
