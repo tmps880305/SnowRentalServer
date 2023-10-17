@@ -25,10 +25,10 @@ public class RentalOrderService {
 
 
     public void addNewRentalOrder(RentalOrder rentalOrder) {
-        Optional<RentalOrder> rentalOrderOptional = rentalOrderRepository.findRentalOrderByCustomerName(rentalOrder.getCustomerName());
-        if (rentalOrderOptional.isPresent()) {
-            throw new IllegalStateException("Name exist");
-        }
+//        Optional<RentalOrder> rentalOrderOptional = rentalOrderRepository.findRentalOrderByCustomerName(rentalOrder.getCustomerName());
+//        if (rentalOrderOptional.isPresent()) {
+//            throw new IllegalStateException("Name exist");
+//        }
 
         List<RentalOrderItem> newOrderItems = rentalOrder.getItems();
         newOrderItems.forEach(this::addNewOrderItem);
