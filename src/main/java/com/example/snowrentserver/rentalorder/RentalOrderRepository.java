@@ -1,4 +1,4 @@
-package com.example.snowrentserver.rentallist;
+package com.example.snowrentserver.rentalorder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RentalListRepository extends JpaRepository<RentalList, Long> {
+public interface RentalOrderRepository extends JpaRepository<RentalOrder, Long> {
 
 //    @Query("SELECT s FROM RentalList WHERE s.name =?1")
-    Optional<RentalList> findRentalListByName(String name);
+    Optional<RentalOrder> findRentalOrderByCustomerName(String customerName);
 }
