@@ -1,5 +1,6 @@
 package com.example.snowrentserver.rentalorder;
 
+import com.example.snowrentserver.rentallist.RentalList;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,22 +18,23 @@ public class RentalOrderItem {
             generator = "rentalorderItem_sequence"
     )
 
-    private Long id;
-    private Long rentalListId;
-    private int amount;
 
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "listId")
+    private RentalList rentalList;
+
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private RentalOrder rentalOrder;
+    private int amount;
 
     public RentalOrderItem() {
     }
 
-    public RentalOrderItem(Long id, Long rentalListId, int amount) {
-        this.id = id;
-        this.rentalListId = rentalListId;
-        this.amount = amount;
-    }
-
-    public RentalOrderItem(Long rentalListId, int amount) {
-        this.rentalListId = rentalListId;
+    public RentalOrderItem(RentalList rentalList, RentalOrder rentalOrder, int amount) {
+        this.rentalList = rentalList;
+        this.rentalOrder = rentalOrder;
         this.amount = amount;
     }
 
@@ -44,12 +46,20 @@ public class RentalOrderItem {
         this.id = id;
     }
 
-    public Long getRentalListId() {
-        return rentalListId;
+    public RentalList getRentalList() {
+        return rentalList;
     }
 
-    public void setRentalListId(Long rentalListId) {
-        this.rentalListId = rentalListId;
+    public void setRentalList(RentalList rentalList) {
+        this.rentalList = rentalList;
+    }
+
+    public RentalOrder getRentalOrder() {
+        return rentalOrder;
+    }
+
+    public void setRentalOrder(RentalOrder rentalOrder) {
+        this.rentalOrder = rentalOrder;
     }
 
     public int getAmount() {
@@ -64,7 +74,8 @@ public class RentalOrderItem {
     public String toString() {
         return "RentalOrderItem{" +
                 "id=" + id +
-                ", rentalListId=" + rentalListId +
+                ", rentalList=" + rentalList +
+                ", rentalOrder=" + rentalOrder +
                 ", amount=" + amount +
                 '}';
     }

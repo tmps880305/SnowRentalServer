@@ -3,6 +3,7 @@ package com.example.snowrentserver.rentalorder;
 import com.example.snowrentserver.rentallist.RentalList;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,21 +22,20 @@ public class RentalOrder {
             generator = "rentalorder_sequence"
     )
 
+
     private Long id;
     private String customerName;
     private int height;
     private String postal;
     private String city;
-    @ManyToMany
-    private List<RentalOrderItem> items;
+    @OneToMany(mappedBy = "rentalOrder")
+    private List<RentalOrderItem> items = new ArrayList<>();
     private float total;
-
 
     public RentalOrder() {
     }
 
-    public RentalOrder(Long id, String customerName, int height, String postal, String city, List<RentalOrderItem> items, float total) {
-        this.id = id;
+    public RentalOrder(String customerName, int height, String postal, String city, List<RentalOrderItem> items, float total) {
         this.customerName = customerName;
         this.height = height;
         this.postal = postal;
@@ -60,7 +60,7 @@ public class RentalOrder {
         this.customerName = customerName;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 

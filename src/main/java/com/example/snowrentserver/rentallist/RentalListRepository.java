@@ -10,4 +10,5 @@ public interface RentalListRepository extends JpaRepository<RentalList, Long> {
 
 //    @Query("SELECT s FROM RentalList WHERE s.name =?1")
     Optional<RentalList> findRentalListByName(String name);
+    Optional<RentalList> findRentalListById(Long id);
 }
