@@ -1,6 +1,5 @@
 package com.example.snowrentserver.rentalorder;
 
-import com.example.snowrentserver.rentallist.RentalList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +18,14 @@ public class RentalOrderController {
 
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping
-    public void registerNewOrder(@RequestBody RentalOrder rentalOrder) {
-        rentalOrderService.addNewRentalOrder(rentalOrder);
+    @PostMapping("/neworder")
+    public Boolean registerNewOrder(@RequestBody RentalOrder rentalOrder) {
+        try {
+            rentalOrderService.addNewRentalOrder(rentalOrder);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

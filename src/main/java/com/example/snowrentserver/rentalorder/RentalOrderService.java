@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class RentalOrderService {
-
     private final RentalListRepository rentalListRepository;
     private final RentalOrderRepository rentalOrderRepository;
     private final RentalOrderItemRepository rentalOrderItemRepository;
@@ -31,12 +30,10 @@ public class RentalOrderService {
         rentalOrderRepository.save(rentalOrder);
         rentalOrder.getItems().forEach(item -> {
             item.setRentalOrder(rentalOrder);
+            Optional<RentalList> tmpRentalList = rentalListRepository.findRentalListById(item.getId() + 1L);
+            item.setRentalList(tmpRentalList.orElse(null));
             addNewOrderItem(item);
         });
-
-//        Optional<RentalOrder> newOrder1 = rentalOrderRepository.findRentalOrderByCustomerName("123");
-//        List<Long> tmp = rentalOrderItemRepository.findIdByOrder(newOrder1);
-
     }
 
     public void addNewOrderItem(RentalOrderItem rentalOrderItem) {
